@@ -28,30 +28,66 @@ def processa_teclado(window, key, scancode, action, mods):
         if not objetos_cena: return
         obj = objetos_cena[idx_selecionado]
 
+        
         if key == glfw.KEY_TAB and action == glfw.PRESS:
             idx_selecionado = (idx_selecionado + 1) % len(objetos_cena)
-            print(f"\n[INFO] Selecao alterada para o objeto: {idx_selecionado}")
+            print(f"\n[INFO] Objeto selecionado alterado para o índice: {idx_selecionado}")
             return
 
-        if key == glfw.KEY_T: modo_atual = 'T'; print("[MODO] TRANSLACAO ativa. (Setas / IJ)")
-        elif key == glfw.KEY_R: modo_atual = 'R'; print("[MODO] ROTACAO ativa. (Setas)")
-        elif key == glfw.KEY_S: modo_atual = 'S'; print("[MODO] ESCALA ativa. ([ e ])")
+        
+        if key == glfw.KEY_T: 
+            modo_atual = 'T'
+            print("\n[MODO] TRANSLAÇÃO ATIVA nos eixos X, Y e Z:")
+            print(" -> A / D : Move no eixo X (Esquerda / Direita)")
+            print(" -> W / S : Move no eixo Y (Cima / Baixo)")
+            print(" -> Q / E : Move no eixo Z (Frente / Trás)")
+        elif key == glfw.KEY_R: 
+            modo_atual = 'R'
+            print("\n[MODO] ROTAÇÃO ATIVA nos eixos X, Y e Z:")
+            print(" -> W / S : Gira no eixo X")
+            print(" -> A / D : Gira no eixo Y")
+            print(" -> Q / E : Gira no eixo Z")
+        elif key == glfw.KEY_S: 
+            modo_atual = 'S'
+            print("\n[MODO] ESCALA ATIVA nos eixos X, Y e Z:")
+            print(" -> A / D : Escala apenas no eixo X")
+            print(" -> W / S : Escala apenas no eixo Y")
+            print(" -> Q / E : Escala apenas no eixo Z")
+            print(" -> [ / ] : Escala UNIFORME (Todos os eixos)")
 
+       
+        
+        
         if modo_atual == 'T':
-            if key == glfw.KEY_RIGHT: obj.posicao[0] += 0.1
-            if key == glfw.KEY_LEFT:  obj.posicao[0] -= 0.1
-            if key == glfw.KEY_UP:    obj.posicao[1] += 0.1
-            if key == glfw.KEY_DOWN:  obj.posicao[1] -= 0.1
-            if key == glfw.KEY_I:     obj.posicao[2] -= 0.1
-            if key == glfw.KEY_J:     obj.posicao[2] += 0.1
+            if key == glfw.KEY_D: obj.posicao[0] += 0.1  # 
+            if key == glfw.KEY_A: obj.posicao[0] -= 0.1  
+            if key == glfw.KEY_W: obj.posicao[1] += 0.1  
+            if key == glfw.KEY_S: obj.posicao[1] -= 0.1  
+            if key == glfw.KEY_E: obj.posicao[2] += 0.1  
+            if key == glfw.KEY_Q: obj.posicao[2] -= 0.1  
 
+        
         elif modo_atual == 'R':
-            if key == glfw.KEY_UP:    obj.rotacao[0] += 5.0
-            if key == glfw.KEY_DOWN:  obj.rotacao[0] -= 5.0
-            if key == glfw.KEY_LEFT:  obj.rotacao[1] -= 5.0
-            if key == glfw.KEY_RIGHT: obj.rotacao[1] += 5.0
+            if key == glfw.KEY_W: obj.rotacao[0] += 5.0   
+            if key == glfw.KEY_S: obj.rotacao[0] -= 5.0
+            if key == glfw.KEY_D: obj.rotacao[1] += 5.0  
+            if key == glfw.KEY_A: obj.rotacao[1] -= 5.0
+            if key == glfw.KEY_E: obj.rotacao[2] += 5.0  
+            if key == glfw.KEY_Q: obj.rotacao[2] -= 5.0
 
+        
         elif modo_atual == 'S':
+            # Escala no eixo X (A/D)
+            if key == glfw.KEY_D: obj.escala[0] += 0.05
+            if key == glfw.KEY_A: obj.escala[0] = max(0.01, obj.escala[0] - 0.05)
+            
+            if key == glfw.KEY_W: obj.escala[1] += 0.05
+            if key == glfw.KEY_S: obj.escala[1] = max(0.01, obj.escala[1] - 0.05)
+            # Escala no eixo Z (Q/E)
+            if key == glfw.KEY_E: obj.escala[2] += 0.05
+            if key == glfw.KEY_Q: obj.escala[2] = max(0.01, obj.escala[2] - 0.05)
+            
+            
             if key == glfw.KEY_RIGHT_BRACKET: 
                 obj.escala = [e + 0.05 for e in obj.escala]
             if key == glfw.KEY_LEFT_BRACKET:  
@@ -71,10 +107,10 @@ def main():
     glfw.set_key_callback(window, processa_teclado)
     inicializa_opengl()
 
-    # Caminho mapeado de acordo com a sua estrutura de pastas do clone
+    
     caminho_suzanne = "assets/CGCCHibrido/assets/Modelos3D/suzanne.obj"
     
-    # Criando instâncias limpas usando a classe correta
+    
     obj1 = ObjetoCarregado3D(caminho_suzanne)
     obj1.posicao = [-1.5, 0.0, 0.0]
     obj1.escala = [0.6, 0.6, 0.6]
