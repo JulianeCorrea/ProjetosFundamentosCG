@@ -47,7 +47,7 @@ Nesta etapa, o visualizador foi evoluído para suportar a aplicação de textura
 * **Carregamento via Pillow (PIL):** Uso da biblioteca Pillow no `main.py` para carregar a imagem do disco, inverter o eixo Y (adequando o padrão de leitura do OpenGL) e enviar os bytes de pixels para a GPU.
 * **Configuração de Textura no OpenGL:** Geração de textura com `glGenTextures`, vinculação com `glBindTexture` e definição de filtros lineares de magnificação/minificação para evitar distorções.
 
-### Demonstração das Malhas Texturizadas (Parte 4)
+### Demonstração das Malhas Texturizadas 
 
 
 ![Resultado Texturas Parte 4](textura.png)
