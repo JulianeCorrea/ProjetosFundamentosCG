@@ -35,3 +35,19 @@ Implementação do carregamento automatizado do modelo 3D da *Suzanne* (Blender)
 *(Abaixo está o registro do funcionamento com os movimentos ativos)*
 
 ![Demonstração do Funcionamento P3](suzanne.gif)
+
+
+## 4ª Parte - Mapeamento de Texturas (Coordenadas UV)
+
+Nesta etapa, o visualizador foi evoluído para suportar a aplicação de texturas 2D sobre as malhas tridimensionais, realizando a leitura completa dos dados de mapeamento do modelo.
+
+**Implementações Realizadas:**
+* **Leitura de Coordenadas UV:** Adaptação do leitor no `objeto.py` para processar as linhas iniciadas com `vt` e associar os índices de textura correspondentes a cada face (`f v/vt/vn`).
+* **Integração com arquivo .MTL:** Leitura automatizada do arquivo de material para identificar o arquivo de imagem difusa (`map_Kd`).
+* **Carregamento via Pillow (PIL):** Uso da biblioteca Pillow no `main.py` para carregar a imagem do disco, inverter o eixo Y (adequando o padrão de leitura do OpenGL) e enviar os bytes de pixels para a GPU.
+* **Configuração de Textura no OpenGL:** Geração de textura com `glGenTextures`, vinculação com `glBindTexture` e definição de filtros lineares de magnificação/minificação para evitar distorções.
+
+### Demonstração das Malhas Texturizadas (Parte 4)
+*(Abaixo está o registro das duas instâncias da Suzanne renderizadas com suas respectivas coordenadas de textura aplicadas com sucesso)*
+
+![Resultado Texturas Parte 4](textura.png)
