@@ -18,3 +18,20 @@ Implementação da geometria do cubo com cores distintas por face.
 ### Demonstração da Interação:
 *(Abaixo está a prova da execução do código com os movimentos ativos)*
 ![Demonstração do Cubo Interativo](./cubo.gif)
+
+
+## 3ª Parte - Visualizador OBJ e Transformações 3D por Eixo
+
+Implementação do carregamento automatizado do modelo 3D da *Suzanne* (Blender) com controle independente de eixos.
+
+**Controles Implementados:**
+* **TAB:** Alterna a seleção entre as duas cabeças da macaca.
+* **T (Translação):** Move nos eixos X (A/D), Y (W/S) e Z (Q/E).
+* **R (Rotação):** Gira nos eixos X (W/S), Y (A/D) e Z (Q/E).
+* **S (Escala):** Escala individual nos eixos X (A/D), Y (W/S) e Z (Q/E).
+* **Teclas + e -:** Aplica escala **uniforme** em todos os eixos ao mesmo tempo.
+
+### Demonstração da Interação (Parte 3)
+*(Abaixo está o registro do funcionamento com os movimentos ativos)*
+
+![Demonstração do Funcionamento P3](suzanne.gif)
