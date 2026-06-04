@@ -71,10 +71,10 @@ def main():
     glfw.set_key_callback(window, processa_teclado)
     inicializa_opengl()
 
-    # Caminho mapeado de acordo com a sua estrutura de pastas do clone
+   
     caminho_suzanne = "assets/CGCCHibrido/assets/Modelos3D/suzanne.obj"
     
-    # Criando instâncias limpas usando a classe correta
+    
     obj1 = ObjetoCarregado3D(caminho_suzanne)
     obj1.posicao = [-1.5, 0.0, 0.0]
     obj1.escala = [0.6, 0.6, 0.6]
