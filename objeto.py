@@ -1,67 +1,102 @@
-import os
 from OpenGL.GL import *
+import os
 
 class ObjetoCarregado3D:
-    def __init__(self, caminho_obj=None):
+    def __init__(self, caminho_obj):
+        self.caminho_obj = caminho_obj
         self.vertices = []
-        self.faces = [] 
-        self.posicao = [0.0, 0.0, 0.0]
-        self.escala = [1.0, 1.0, 1.0]
-        self.rotacao = [0.0, 0.0, 0.0]
+        self.coordenadas_textura = []
+        self.faces = []
         
-        if caminho_obj:
-            self.carregar_obj(caminho_obj)
+        # Propriedades de transformação
+        self.posicao = [0.0, 0.0, 0.0]
+        self.rotacao = [0.0, 0.0, 0.0]
+        self.escala = [1.0, 1.0, 1.0]
+        
+        # Atributos de Textura (Parte 4)
+        self.arquivo_textura = None 
+        self.id_textura = None
+        
+        self.carregar_obj()
 
-    def carregar_obj(self, caminho):
-        if not os.path.exists(caminho):
-            print(f"\n[ERRO] Arquivo '{caminho}' nao foi encontrado!")
+    def carregar_obj(self):
+        if not os.path.exists(self.caminho_obj):
+            print(f"[ERRO] Arquivo nao encontrado: {self.caminho_obj}")
             return
 
-        with open(caminho, 'r') as f:
+        v_temporarios = []
+        vt_temporarios = []
+
+        with open(self.caminho_obj, 'r') as f:
             for linha in f:
-                if linha.startswith('#') or not linha.strip():
-                    continue
                 partes = linha.split()
-                comando = partes[0]
+                if not partes:
+                    continue
+                
+                if partes[0] == 'v':
+                    v_temporarios.append([float(partes[1]), float(partes[2]), float(partes[3])])
+                
+                elif partes[0] == 'vt':
+                    vt_temporarios.append([float(partes[1]), float(partes[2])])
+                
+                elif partes[0] == 'mtllib':
+                    pasta_origem = os.path.dirname(self.caminho_obj)
+                    caminho_mtl = os.path.join(pasta_origem, partes[1])
+                    self.carregar_mtl(caminho_mtl)
 
-                if comando == 'v':
-                    self.vertices.append([float(partes[1]), float(partes[2]), float(partes[3])])
-                elif comando == 'f':
+                elif partes[0] == 'f':
                     face_vertices = []
-                    for token in partes[1:]:
-                        v_idx = int(token.split('/')[0]) - 1
-                        face_vertices.append(v_idx)
+                    face_texturas = []
                     
-                    for i in range(1, len(face_vertices) - 1):
-                        self.faces.append([face_vertices[0], face_vertices[i], face_vertices[i+1]])
+                    for vertice_info in partes[1:]:
+                        dados = vertice_info.split('/')
+                        
+                        idx_v = int(dados[0]) - 1
+                        face_vertices.append(v_temporarios[idx_v])
+                        
+                        if len(dados) > 1 and dados[1] != '':
+                            idx_vt = int(dados[1]) - 1
+                            face_texturas.append(vt_temporarios[idx_vt])
+                        else:
+                            face_texturas.append([0.0, 0.0])
+                    
+                    self.faces.append((face_vertices, face_texturas))
 
-def desenhar_objeto_malha(obj, selecionado=False):
-    if not obj.vertices or not obj.faces:
-        return
+        print(f"[OK] {self.caminho_obj} carregado.")
 
-    glPushMatrix()
-    glTranslatef(obj.posicao[0], obj.posicao[1], obj.posicao[2])
-    glRotatef(obj.rotacao[0], 1, 0, 0)
-    glRotatef(obj.rotacao[1], 0, 1, 0)
-    glRotatef(obj.rotacao[2], 0, 0, 1)
-    glScalef(obj.escala[0], obj.escala[1], obj.escala[2])
+    def carregar_mtl(self, caminho_mtl):
+        if not os.path.exists(caminho_mtl):
+            return
+        with open(caminho_mtl, 'r') as f:
+            for linha in f:
+                partes = linha.split()
+                if not partes:
+                    continue
+                if partes[0] == 'map_Kd':
+                    self.arquivo_textura = partes[1]
 
-    glEnable(GL_LIGHTING)
-    glEnable(GL_LIGHT0)
-    glEnable(GL_COLOR_MATERIAL)
-    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
+    def desenhar(self):
+        glPushMatrix()
+        glTranslatef(self.posicao[0], self.posicao[1], self.posicao[2])
+        glRotatef(self.rotacao[0], 1, 0, 0)
+        glRotatef(self.rotacao[1], 0, 1, 0)
+        glRotatef(self.rotacao[2], 0, 0, 1)
+        glScalef(self.escala[0], self.escala[1], self.escala[2])
 
-    if selecionado:
-        glColor3f(1.0, 1.0, 0.0)  
-    else:
-        glColor3f(0.0, 0.8, 0.8)  
+        if self.id_textura is not None:
+            glEnable(GL_TEXTURE_2D)
+            glBindTexture(GL_TEXTURE_2D, self.id_textura)
+            glColor3f(1.0, 1.0, 1.0)
+        else:
+            glDisable(GL_TEXTURE_2D)
+            glColor3f(0.7, 0.7, 0.7)
 
-    glBegin(GL_TRIANGLES)
-    for face in obj.faces:
-        for v_idx in face:
-            if v_idx < len(obj.vertices):
-                glVertex3fv(obj.vertices[v_idx])
-    glEnd()
+        for face_verts, face_texs in self.faces:
+            glBegin(GL_POLYGON)
+            for i in range(len(face_verts)):
+                if self.id_textura is not None:
+                    glTexCoord2f(face_texs[i][0], face_texs[i][1])
+                glVertex3fv(face_verts[i])
+            glEnd()
 
-    glDisable(GL_LIGHTING)
-    glPopMatrix()
+        glPopMatrix()
