@@ -52,9 +52,9 @@ def desenhar_objeto_malha(obj, selecionado=False):
     glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE)
 
     if selecionado:
-        glColor3f(1.0, 1.0, 0.0)  # Amarelo para o selecionado
+        glColor3f(1.0, 1.0, 0.0)  
     else:
-        glColor3f(0.0, 0.8, 0.8)  # Ciano para o objeto secundario
+        glColor3f(0.0, 0.8, 0.8)  
 
     glBegin(GL_TRIANGLES)
     for face in obj.faces:
