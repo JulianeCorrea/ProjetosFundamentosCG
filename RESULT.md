@@ -16,7 +16,7 @@ Implementação da geometria do cubo com cores distintas por face.
 * `TAB`: Alterna a seleção entre os cubos da cena.
 
 ### Demonstração da Interação:
-*(Abaixo está a prova da execução do código com os movimentos ativos)*
+
 ![Demonstração do Cubo Interativo](./cubo.gif)
 
 
@@ -32,7 +32,7 @@ Implementação do carregamento automatizado do modelo 3D da *Suzanne* (Blender)
 * **Teclas + e -:** Aplica escala **uniforme** em todos os eixos ao mesmo tempo.
 
 ### Demonstração da Interação (Parte 3)
-*(Abaixo está o registro do funcionamento com os movimentos ativos)*
+
 
 ![Demonstração do Funcionamento P3](suzanne.gif)
 
@@ -48,6 +48,6 @@ Nesta etapa, o visualizador foi evoluído para suportar a aplicação de textura
 * **Configuração de Textura no OpenGL:** Geração de textura com `glGenTextures`, vinculação com `glBindTexture` e definição de filtros lineares de magnificação/minificação para evitar distorções.
 
 ### Demonstração das Malhas Texturizadas (Parte 4)
-*(Abaixo está o registro das duas instâncias da Suzanne renderizadas com suas respectivas coordenadas de textura aplicadas com sucesso)*
+
 
 ![Resultado Texturas Parte 4](textura.png)
