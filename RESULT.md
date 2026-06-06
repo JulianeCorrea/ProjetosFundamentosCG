@@ -64,7 +64,7 @@ Nesta última etapa, foi implementado o clássico sistema de iluminação cinema
 * **Fator de Atenuação Difusa:** Configuração de atenuação linear nas três fontes de luz (`GL_LINEAR_ATTENUATION`), simulando a perda física de intensidade de luz com base na distância geométrica até a malha.
 * **Controle de Teclado Independente:** Mapeamento das teclas numéricas `1`, `2` e `3` para ligar e desligar de forma independente cada uma das três fontes de luz em tempo de execução, permitindo testar o impacto isolado de cada componente.
 
-### Demonstração do Funcionamento (GIF da Parte 5)
+### Demonstração do Funcionamento
 
 
 ![Funcionamento Iluminação Parte 5](iluminação.gif)
