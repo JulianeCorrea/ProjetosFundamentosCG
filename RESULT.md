@@ -31,7 +31,7 @@ Implementação do carregamento automatizado do modelo 3D da *Suzanne* (Blender)
 * **S (Escala):** Escala individual nos eixos X (A/D), Y (W/S) e Z (Q/E).
 * **Teclas + e -:** Aplica escala **uniforme** em todos os eixos ao mesmo tempo.
 
-### Demonstração da Interação (Parte 3)
+### Demonstração da Interação 
 
 
 ![Demonstração do Funcionamento P3](suzanne.gif)
@@ -67,4 +67,4 @@ Nesta última etapa, foi implementado o clássico sistema de iluminação cinema
 ### Demonstração do Funcionamento (GIF da Parte 5)
 *(Abaixo está a gravação mostrando o comportamento dinâmico das luzes acompanhando a translação do objeto e a alternância dos interruptores 1, 2 e 3)*
 
-![Funcionamento Iluminação Parte 5](iluminacao.gif)
+![Funcionamento Iluminação Parte 5](iluminação.gif)
