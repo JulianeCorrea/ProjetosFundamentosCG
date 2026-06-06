@@ -51,3 +51,20 @@ Nesta etapa, o visualizador foi evoluído para suportar a aplicação de textura
 
 
 ![Resultado Texturas Parte 4](textura.png)
+
+
+## 5ª Parte - Iluminação de Três Pontos Dinâmica
+
+Nesta última etapa, foi implementado o clássico sistema de iluminação cinematográfica/fotográfica de três pontos, calculado de maneira 100% automatizada com base na posição do objeto selecionado.
+
+**Implementações Realizadas:**
+* **Luz Principal (Key Light - GL_LIGHT0):** Fonte de luz mais intensa posicionada à frente e à direita do objeto de foco, definindo o tom e as sombras principais da cena.
+* **Luz de Preenchimento (Fill Light - GL_LIGHT1):** Posicionada no lado oposto (à esquerda) com intensidade moderada e tom levemente frio (azulada) para suavizar as sombras geradas pela luz principal.
+* **Luz de Fundo (Back Light - GL_LIGHT2):** Posicionada atrás e acima da malha, criando um efeito de silhueta (*rim light*) que separa o objeto tridimensional do fundo escuro da cena.
+* **Fator de Atenuação Difusa:** Configuração de atenuação linear nas três fontes de luz (`GL_LINEAR_ATTENUATION`), simulando a perda física de intensidade de luz com base na distância geométrica até a malha.
+* **Controle de Teclado Independente:** Mapeamento das teclas numéricas `1`, `2` e `3` para ligar e desligar de forma independente cada uma das três fontes de luz em tempo de execução, permitindo testar o impacto isolado de cada componente.
+
+### Demonstração do Funcionamento (GIF da Parte 5)
+*(Abaixo está a gravação mostrando o comportamento dinâmico das luzes acompanhando a translação do objeto e a alternância dos interruptores 1, 2 e 3)*
+
+![Funcionamento Iluminação Parte 5](iluminacao.gif)
