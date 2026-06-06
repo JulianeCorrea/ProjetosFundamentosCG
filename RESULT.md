@@ -65,6 +65,6 @@ Nesta última etapa, foi implementado o clássico sistema de iluminação cinema
 * **Controle de Teclado Independente:** Mapeamento das teclas numéricas `1`, `2` e `3` para ligar e desligar de forma independente cada uma das três fontes de luz em tempo de execução, permitindo testar o impacto isolado de cada componente.
 
 ### Demonstração do Funcionamento (GIF da Parte 5)
-*(Abaixo está a gravação mostrando o comportamento dinâmico das luzes acompanhando a translação do objeto e a alternância dos interruptores 1, 2 e 3)*
+
 
 ![Funcionamento Iluminação Parte 5](iluminação.gif)
