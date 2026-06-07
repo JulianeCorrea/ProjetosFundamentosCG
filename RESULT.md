@@ -68,3 +68,55 @@ Nesta última etapa, foi implementado o clássico sistema de iluminação cinema
 
 
 ![Funcionamento Iluminação Parte 5](iluminação.gif)
+
+
+# Relatório de Resultados - Iluminação Dinâmica (Modelo de Phong)
+  
+
+---
+
+## 1. Descrição da Implementação
+
+Nesta etapa, o foco exclusivo foi a integração do **Modelo de Iluminação de Phong** ao pipeline de renderização do projeto. O objetivo principal foi computar tridimensionalmente as três componentes fundamentais da luz (Ambiente, Difusa e Especular) para garantir volume e realismo aos modelos carregados.
+
+Para assegurar estabilidade no meu hardware e contornar limitações de compatibilidade nos drivers legados com estruturas de Shaders modernos (`glUseProgram`), a técnica de Phong foi implementada de forma nativa através da configuração matemática do pipeline fixo do OpenGL, operando diretamente por vértice.
+
+### Componentes do Modelo de Phong Aplicadas:
+* **Componente Ambiente ($K_a$):** Garante uma iluminação uniforme básica em todas as faces do objeto, impedindo que as regiões opostas às luzes fiquem completamente pretas.
+* **Componente Difusa ($K_d$):** Calcula a intensidade da luz com base no ângulo de incidência dos raios luminosos sobre a superfície, gerando o sombreamento característico das curvaturas da malha.
+* **Componente Especular ($K_s$ e $N_s$):** Simula o reflexo brilhante e "espelhado" da fonte de luz. O coeficiente $N_s$ (*shininess*) controla o polimento e a concentração desse ponto de brilho nas curvas.
+
+---
+
+## 2. Estrutura de Arquivos e Processamento de Dados
+
+A implementação dessa parte do projeto exigiu a expansão da leitura de novas propriedades contidas nos arquivos de recursos (*assets*):
+
+1.  **Leitura de Normais (`vn`) no `objeto.py`:** O leitor do arquivo `.obj` foi expandido pra capturar as linhas de vetores normais (`vn`). Durante a renderização, a função `glNormal3fv()` envia a orientação correta de cada vértice antes de mapear sua posição espacial (`glVertex3fv`).
+2.  **Leitura de Materiais (`.mtl`):** O método de carga lê os coeficientes específicos configurados no arquivo de materiais (valores de `Ka`, `Kd`, `Ks` e `Ns`). Caso o arquivo esteja ausente, o sistema atribui coeficientes bronzeados por padrão pra evitar telas pretas.
+3.  **Configuração de Materiais no OpenGL:** No laço de desenho do objeto, os coeficientes extraídos do material são aplicados nativamente através de chamadas a `glMaterialfv()` e `glMaterialf()`.
+
+---
+
+## 3. Sistema de Iluminação a 3 Pontos (Estúdio)
+
+A cena utiliza uma estrutura de iluminação em estúdio configurada no arquivo `main.py`, onde as fontes reagem em tempo real à posição dos objetos:
+
+* **Luz Principal (Key Light - `GL_LIGHT0`):** Posicionada à frente e à direita do objeto com alta intensidade e cor levemente quente pra criar o volume principal.
+* **Luz de Preenchimento (Fill Light - `GL_LIGHT1`):** Posicionada à esquerda com intensidade suave e tom frio pra suavizar as sombras pesadas.
+* **Luz de Fundo (Back Light - `GL_LIGHT2`):** Posicionada atrás do modelo pra destacar a silhueta em relação ao fundo escuro da cena.
+
+### Controles Ativos no Teclado:
+* `1`, `2` e `3`: Alternam (Ativam/Desativam) a Luz Principal, de Preenchimento e de Fundo, respectivamente.
+* `T` / `R` / `S`: Modos de Translação, Rotação e Escala aplicados ao objeto selecionado (alternável via `TAB`).
+
+---
+
+## 4. Demonstração Visual
+
+Abaixo está a gravação demonstrativa que valida a execução correta da iluminação de Phong sobre a geometria das malhas da Suzanne. É possível observar o ponto de luz especular (brilho) deslocando-se de forma suave pelas curvas do modelo conforme ele é rotacionado e transladado no espaço.
+
+![Demonstração da Iluminação Dinâmica](iluminacaophong.gif)
+
+---
+
