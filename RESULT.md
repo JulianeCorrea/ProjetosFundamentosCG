@@ -68,3 +68,18 @@ Nesta última etapa, foi implementado o clássico sistema de iluminação cinema
 
 
 ![Funcionamento Iluminação Parte 5](iluminação.gif)
+
+
+# 6ª Parte - Iluminação Dinâmica (Modelo de Phong)
+
+Implementação do modelo de iluminação de Phong calculando as componentes Ambiente, Difusa e Especular com base nas normais dos vértices (`vn`) extraídas do arquivo OBJ e coeficientes lidos do arquivo de materiais (`.mtl`).
+
+**Controles Implementados:**
+* **Controle das Luzes:** Teclas `1`, `2` e `3` alternam o estado (ligado/desligado) das luzes Principal, Preenchimento e Fundo.
+* **Interação com o Objeto:** Seleção via `TAB` com manipulação ativa de Translação (`T`), Rotação (`R`) e Escala (`S`) pelos eixos convencionais.
+
+## Demonstração da Iluminação
+
+![Iluminacao 3 Pontos Dinamica - Juliane Correa](iluminacaophong.gif)
+
+
