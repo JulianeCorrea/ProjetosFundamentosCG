@@ -80,7 +80,6 @@ Implementação do modelo de iluminação de Phong calculando as componentes Amb
 
 ## Demonstração da Iluminação
 
-![Iluminacao 3 Pontos Dinamica - Juliane](iluminacaophong.gif)
+![Iluminacao 3 Pontos Dinamica - Juliane Correa](iluminacaophong.gif)
 
----
 
