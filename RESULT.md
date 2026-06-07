@@ -70,12 +70,9 @@ Nesta última etapa, foi implementado o clássico sistema de iluminação cinema
 ![Funcionamento Iluminação Parte 5](iluminação.gif)
 
 
-# Relatório de Resultados - Iluminação Dinâmica (Modelo de Phong)
+## 6ª Parte - Iluminação Dinâmica (Modelo de Phong)
   
-
----
-
-## 1. Descrição da Implementação
+  ## 1. Descrição da Implementação
 
 Nesta etapa, o foco exclusivo foi a integração do **Modelo de Iluminação de Phong** ao pipeline de renderização do projeto. O objetivo principal foi computar tridimensionalmente as três componentes fundamentais da luz (Ambiente, Difusa e Especular) para garantir volume e realismo aos modelos carregados.
 
@@ -86,9 +83,9 @@ Para assegurar estabilidade no meu hardware e contornar limitações de compatib
 * **Componente Difusa ($K_d$):** Calcula a intensidade da luz com base no ângulo de incidência dos raios luminosos sobre a superfície, gerando o sombreamento característico das curvaturas da malha.
 * **Componente Especular ($K_s$ e $N_s$):** Simula o reflexo brilhante e "espelhado" da fonte de luz. O coeficiente $N_s$ (*shininess*) controla o polimento e a concentração desse ponto de brilho nas curvas.
 
----
 
-## 2. Estrutura de Arquivos e Processamento de Dados
+
+  ## 2. Estrutura de Arquivos e Processamento de Dados
 
 A implementação dessa parte do projeto exigiu a expansão da leitura de novas propriedades contidas nos arquivos de recursos (*assets*):
 
@@ -96,9 +93,8 @@ A implementação dessa parte do projeto exigiu a expansão da leitura de novas 
 2.  **Leitura de Materiais (`.mtl`):** O método de carga lê os coeficientes específicos configurados no arquivo de materiais (valores de `Ka`, `Kd`, `Ks` e `Ns`). Caso o arquivo esteja ausente, o sistema atribui coeficientes bronzeados por padrão pra evitar telas pretas.
 3.  **Configuração de Materiais no OpenGL:** No laço de desenho do objeto, os coeficientes extraídos do material são aplicados nativamente através de chamadas a `glMaterialfv()` e `glMaterialf()`.
 
----
 
-## 3. Sistema de Iluminação a 3 Pontos (Estúdio)
+   ## 3. Sistema de Iluminação a 3 Pontos (Estúdio)
 
 A cena utiliza uma estrutura de iluminação em estúdio configurada no arquivo `main.py`, onde as fontes reagem em tempo real à posição dos objetos:
 
@@ -110,9 +106,7 @@ A cena utiliza uma estrutura de iluminação em estúdio configurada no arquivo 
 * `1`, `2` e `3`: Alternam (Ativam/Desativam) a Luz Principal, de Preenchimento e de Fundo, respectivamente.
 * `T` / `R` / `S`: Modos de Translação, Rotação e Escala aplicados ao objeto selecionado (alternável via `TAB`).
 
----
-
-## 4. Demonstração Visual
+Demonstração Visual
 
 Abaixo está a gravação demonstrativa que valida a execução correta da iluminação de Phong sobre a geometria das malhas da Suzanne. É possível observar o ponto de luz especular (brilho) deslocando-se de forma suave pelas curvas do modelo conforme ele é rotacionado e transladado no espaço.
 
