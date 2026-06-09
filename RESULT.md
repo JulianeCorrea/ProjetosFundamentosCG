@@ -83,3 +83,14 @@ Implementação do modelo de iluminação de Phong calculando as componentes Amb
 ![Iluminacao 3 Pontos Dinamica - Juliane Correa](iluminaçãophong.gif)
 
 
+# 7ª Parte - Câmera em Primeira Pessoa (FPS)
+
+Implementação de uma câmera sintética interativa em primeira pessoa estruturada através de uma classe encapsulada `Camera`. O sistema realiza o cálculo dinâmico de vetores direcionais (`front`, `right`, `up`) a partir de ângulos de Euler para navegar livremente pelo cenário tridimensional.
+
+**Controles Implementados:**
+* **Navegação Espacial:** Teclas `W` e `S` realizam a movimentação para frente/trás, enquanto `A` e `D` efetuam o deslocamento lateral (*strafing*).
+* **Orientação do Olhar:** As setas direcionais do teclado ($\leftarrow$, $\rightarrow$, $\uparrow$, $\downarrow$) controlam a rotação de *Yaw* e *Pitch* da câmera em tempo real de forma contínua.
+
+## Demonstração da Câmera
+
+![Navegacao em Primeira Pessoa - Juliane](camera.gif)
