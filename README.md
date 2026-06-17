@@ -100,7 +100,7 @@ $$[x,y,z] = 0.5 \cdot [ (2P_1) + (-P_0 + P_2)t + (2P_0 - 5P_1 + 4P_2 - P_3)t^2 +
 * `2`: Liga/Desliga a Luz de Preenchimento (*Fill Light*).
 * `3`: Liga/Desliga a Luz de Fundo (*Back Light*).
 
-###  Sistema de Trajetórias (Parte 8)
+###  Sistema de Trajetórias 
 * `P`: Registra a coordenada tridimensional atual do objeto como um novo ponto na trajetória e atualiza o arquivo de configuração no disco.
 * `O`: Limpa completamente o circuito do objeto selecionado e zera o arquivo de texto associado.
 * `Espaço`: Dá Play / Pause na animação automática ao longo da Spline (Requer no mínimo 4 pontos salvos).
