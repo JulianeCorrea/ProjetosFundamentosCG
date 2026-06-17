@@ -2,22 +2,22 @@
 
 # Visualizador Espacial 3D Interativo: Da Geometria às Splines de Catmull-Rom
 
-## 🚀 Sobre o Projeto
+##  Sobre o Projeto
 Este repositório contém o desenvolvimento de um **Visualizador Gráfico 3D Interativo** construído do zero utilizando **Python 3** e a API **OpenGL 2.1** (através das bibliotecas `PyOpenGL` e `GLFW`). 
 
 O objetivo do projeto foi construir, de forma incremental, uma engine gráfica capaz de carregar malhas poligonais complexas, aplicar texturização mapeada, simular modelos físicos de iluminação dinâmica (Phong), implementar navegação virtual em primeira pessoa e automatizar movimentações procedurais através de curvas matemáticas suaves com persistência de dados.
 
 ---
 
-## 🛠️ Tecnologias, Dependências e Hardware de Execução
+##  Tecnologias, Dependências e Hardware de Execução
 
-### 💻 Hardware Utilizado no Ambiente de Testes
+###  Hardware Utilizado no Ambiente de Testes
 Para a validação e garantia de desempenho em tempo real (60 FPS estáveis) do pipeline gráfico, a aplicação foi executada no seguinte setup:
 * **Processador (CPU):** Intel(R) Core(TM) i5-14600KF (3.50 GHz, 14 Núcleos físicos e 20 Processadores lógicos)
 * **Placa Gráfica (GPU):** NVIDIA GeForce GT 210 (Suporte nativo à API base do OpenGL)
 * **Placa-Mãe:** B760M GAMING WIFI (Arquitetura baseada em x64)
 
-### 📦 Bibliotecas e Tecnologias Core
+###  Bibliotecas e Tecnologias Core
 * **Python 3.10+** (Ambiente de Execução)
 * **GLFW** (Gerenciamento de janelas, contexto OpenGL e captura de eventos de teclado/mouse)
 * **PyOpenGL / PyOpenGL_accelerate** (Interface de comunicação direta com o pipeline de hardware da GPU)
@@ -25,7 +25,7 @@ Para a validação e garantia de desempenho em tempo real (60 FPS estáveis) do 
 
 ---
 
-## 🏛️ Estrutura Arquitetural do Código
+##  Estrutura Arquitetural do Código
 O ecossistema do projeto foi modularizado para seguir boas práticas de engenharia de software, separando as responsabilidades de renderização, matemática vetorial e controle de estados:
 
 * **`main.py`**: O núcleo da aplicação. Gerencia o ciclo de vida da janela GLFW, o loop principal de renderização, o mapeamento do teclado, a inicialização das fontes de luz e o pipeline de projeção.
@@ -34,7 +34,7 @@ O ecossistema do projeto foi modularizado para seguir boas práticas de engenhar
 
 ---
 
-## 📐 Detalhamento das Etapas de Desenvolvimento
+##  Detalhamento das Etapas de Desenvolvimento
 
 ### 1ª Parte - Configuração do Ambiente e Pipeline Gráfico
 Inicialização do contexto gráfico utilizando GLFW. Configuração dos estados fundamentais do OpenGL, como o buffer de profundidade (`GL_DEPTH_TEST`), mapeamento de viewport e matriz de projeção perspectiva inicial utilizando `gluPerspective`.
@@ -80,37 +80,27 @@ $$[x,y,z] = 0.5 \cdot [ (2P_1) + (-P_0 + P_2)t + (2P_0 - 5P_1 + 4P_2 - P_3)t^2 +
 
 ---
 
-## 🎮 Mapeamento Completo de Controles
+##  Mapeamento Completo de Controles
 
-### 🕹️ Modos de Transformação
+###  Modos de Transformação
 * `T`: Ativa o Modo de **Translação**.
 * `R`: Ativa o Modo de **Rotação**.
 * `S`: Ativa o Modo de **Escala**.
 * `I`, `K`, `J`, `L`: Modificadores universais (Eixos X e Y) aplicados ao objeto selecionado baseado no Modo ativo acima.
 * `TAB`: Alterna a seleção de foco entre os objetos da cena.
 
-### 🎥 Navegação da Câmera (FPS)
+###  Navegação da Câmera (FPS)
 * `W` / `S`: Move a câmera para Frente / Trás.
 * `A` / `D`: Move a câmera para a Esquerda / Direita (*Strafing*).
 * `Seta para Esquerda` / `Seta para Direita`: Gira o olhar horizontalmente (*Yaw*).
 * `Seta para Cima` / `Seta para Baixo`: Gira o olhar verticalmente (*Pitch*).
 
-### 💡 Gerenciamento de Luzes (On/Off)
+###  Gerenciamento de Luzes (On/Off)
 * `1`: Liga/Desliga a Luz Principal (*Key Light*).
 * `2`: Liga/Desliga a Luz de Preenchimento (*Fill Light*).
 * `3`: Liga/Desliga a Luz de Fundo (*Back Light*).
 
-### 🛣️ Sistema de Trajetórias (Parte 8)
+###  Sistema de Trajetórias (Parte 8)
 * `P`: Registra a coordenada tridimensional atual do objeto como um novo ponto na trajetória e atualiza o arquivo de configuração no disco.
 * `O`: Limpa completamente o circuito do objeto selecionado e zera o arquivo de texto associado.
 * `Espaço`: Dá Play / Pause na animação automática ao longo da Spline (Requer no mínimo 4 pontos salvos).
-
----
-
-## 📊 Demonstração Visual dos Resultados
-
-### Geometria e Interpolação de Curvas (Parte 8)
-![Trajetórias Cíclicas com Catmull-Rom](./trajetoria.gif)
-
-### Sistema de Navegação FPS e Iluminação Realista de Phong
-![Navegacao em Primeira Pessoa e Iluminação](./camera.gif)
