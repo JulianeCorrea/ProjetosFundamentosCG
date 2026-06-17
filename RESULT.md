@@ -94,3 +94,23 @@ Implementação de uma câmera sintética interativa em primeira pessoa estrutur
 ## Demonstração da Câmera
 
 ![Navegacao em Primeira Pessoa - Juliane](camera.gif)
+
+# 8ª Parte - Trajetórias Cíclicas com Interpolação Spline (Catmull-Rom)
+
+Implementação de um sistema de animação procedural e persistência de dados para manipulação dinâmica de objetos na cena 3D. O sistema calcula caminhos curvilíneos suaves através de interpolação por Splines e gerencia ciclos contínuos de movimentação integrada ao sistema de arquivos.
+
+**Implementações Realizadas:**
+* **Interpolação por Splines de Catmull-Rom:** Substituição de translações lineares rígidas por trajetórias curvas e orgânicas, calculadas por meio da equação polinomial por parcelas de potências de $t$ com base nas diretrizes matemáticas da disciplina.
+* **Movimento Cíclico Automático:** Implementação de um laço contínuo e fechado utilizando aritmética modular (`%`). Ao alcançar o limite do segmento atual ($t \geq 1.0$), o objeto avança automaticamente para o próximo trecho de nós de forma circular, reiniciando o circuito indefinidamente.
+* **Mecanismo de Persistência em Disco:** Desenvolvimento de rotinas de leitura e escrita para arquivos de configuração planos (`.txt`). Os pontos definidos pelo utilizador são armazenados permanentemente em disco e carregados de forma automatizada durante a inicialização do programa.
+* **Isolamento de Transformações Concorrentes:** Estruturação do pipeline geométrico que permite que os objetos realizem a translação automatizada ao longo da curva enquanto o utilizador mantém controle livre em tempo real sobre a escala (`S`) e rotação (`R`) através dos eixos convencionais.
+
+**Controles Implementados:**
+* **`P` (Gravar Ponto):** Captura a coordenada $[X, Y, Z]$ atual da malha selecionada, adiciona-a como um novo nó de controle da trajetória e atualiza o arquivo de configuração no disco.
+* **`O` (Reset de Percurso):** Limpa toda a lista de nós salvos do objeto atual, interrompe a animação e zera o seu respectivo arquivo de texto para novas criações.
+* **`Espaço` (Play / Pause):** Alterna o estado da simulação de movimento automático, exibindo alertas no console caso os critérios matemáticos mínimos (mínimo de 4 pontos) não sejam cumpridos.
+* **`I`, `K`, `J`, `L`:** Manipulação ativa das transformações geométricas (Translação, Rotação ou Escala) de acordo com o modo selecionado (`T`, `R`, `S`).
+
+## Demonstração da Trajetória
+
+![Trajetórias Cíclicas - Juliane](trajetoria.gif)
