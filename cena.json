@@ -1,0 +1,11 @@
+{
+  "camera": {"posicao": [0.0, 1.0, 6.0]},
+  "objetos": [
+    {
+      "arquivo": "assets/CGCCHibrido/assets/Modelos3D/suzanne.obj",
+      "posicao": [-2.0, 0.0, 0.0],
+      "escala": [0.7, 0.7, 0.7],
+      "pontos_controle": [[-2.0, 0.0, 0.0], [-2.0, 2.0, -2.0], [0.0, 3.0, -4.0], [-4.0, 1.0, -2.0]]
+    }
+  ]
+}
